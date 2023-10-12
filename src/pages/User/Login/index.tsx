@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+import { userLoginUsingPOST } from '@/services/yuapi-backend/userController';
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -17,9 +18,7 @@ import {
 import { history, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
-import { flushSync } from 'react-dom';
 import styles from './index.less';
-import { userLoginUsingPOST } from '@/services/yuapi-backend/userController';
 
 const LoginMessage: React.FC<{
   content: string;
@@ -49,7 +48,7 @@ const Login: React.FC = () => {
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
         setInitialState({
-          loginUser: res.data
+          loginUser: res.data,
         });
         return;
       }
@@ -65,7 +64,7 @@ const Login: React.FC = () => {
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src="/logo.svg" />}
-          title="鱼皮接口"
+          title="Likz接口"
           subTitle={'API 开放平台'}
           initialValues={{
             autoLogin: true,
